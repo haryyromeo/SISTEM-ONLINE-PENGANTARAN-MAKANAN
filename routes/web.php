@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\MenyuplaiMakananController;
+use App\Http\Controllers\MengaturHargaController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\SellerController;
@@ -17,8 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'registerUser']);
+
+// Tampilkan halaman register
+Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
+
+// Simpan data register
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 Route::get('/login', [SessionController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [SessionController::class, 'login']);
 Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
@@ -46,10 +52,3 @@ Route::post('/delivery/assign/{deliveryId}/{driverId}', [DeliveryController::cla
 Route::post('/delivery/status/{deliveryId}', [DeliveryController::class, 'updateDeliveryStatus']);
 Route::post('/delivery/confirm/{deliveryId}', [DeliveryController::class, 'confirmDelivery']);
 
-
-Route::get('/admin/users', [AdminController::class, 'manageUsers']);
-Route::get('/admin/reports', [AdminController::class, 'viewReports']);
-Route::post('/admin/seller/approve/{sellerId}', [AdminController::class, 'approveSeller']);
-Route::post('/report/generate', [ReportController::class, 'generateReport'])->name('report.generate');
-Route::get('/report/view/{reportId}', [ReportController::class, 'viewReport'])->name('report.view');
-Route::get('/report/pdf/{reportId}', [ReportController::class, 'exportReportPDF'])->name('report.pdf');

@@ -2,44 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
-use App\Models\Customer; // Ganti User -> Customer
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    public function showRegistrationForm()
+    public function showForm()
     {
-        return view('auth.register');
+        return view('register');
     }
 
-    public function registerUser(Request $request)
-    {
-        // Validasi disesuaikan dengan tabel Customer
-        $validator = Validator::make($request->all(), [
-            'nama_customer' => 'required|string|max:255',
-            'email_customer' => 'required|string|email|unique:Customer,email_customer',
-            'password_customer' => 'required|string|min:6',
-            'alamat_customer' => 'required|string',
-            'telp_customer' => 'required|string|max:20',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'nama_customer' => 'required|string|max:255|unique:customers,nama_customer',
+        'email_customer' => 'required|email|max:255|unique:customers,email_customer',
+        'password_customer' => 'required|min:6|confirmed',
+    ]);
 
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
+    Customer::create([
+        'nama_customer' => $request->nama_customer,
+        'email_customer' => $request->email_customer,
+        'password_customer' => Hash::make($request->password_customer),
+        'alamat_customer' => $request->alamat_customer ?? '-', // default kosong
+        'telp_customer' => $request->telp_customer ?? '-', // default kosong
+    ]);
 
-        // Buat Customer baru
-        $customer = Customer::create([
-            'nama_customer' => $request->nama_customer,
-            'email_customer' => $request->email_customer,
-            'password_customer' => Hash::make($request->password_customer),
-            'alamat_customer' => $request->alamat_customer,
-            'telp_customer' => $request->telp_customer,
-        ]);
-
-        auth('customer')->login($customer); // Login sebagai customer
-
-        return redirect('/dashboard');
-    }
+    return redirect()->route('register.form')->with('success', 'Akun berhasil dibuat! Silakan login.');
+}
 }
