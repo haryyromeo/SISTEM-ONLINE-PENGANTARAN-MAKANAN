@@ -1,0 +1,21 @@
+// database/migrations/...._create_Menu_table.php
+public function up()
+{
+    Schema::create('Menu', function (Blueprint $table) {
+        $table->id('id_menu'); // PK
+        
+        // FK1
+        $table->foreignId('id_customer')
+              ->constrained('Customer', 'id_customer')
+              ->onDelete('cascade');
+        
+        // FK2
+        $table->foreignId('id_seller')
+              ->constrained('Seller', 'id_seller')
+              ->onDelete('cascade');
+        
+        $table->string('nama_menu');
+        $table->decimal('harga_menu', 10, 2);
+        $table->integer('stok_menu');
+    });
+}

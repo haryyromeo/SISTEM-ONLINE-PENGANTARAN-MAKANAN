@@ -1,0 +1,17 @@
+// database/migrations/...._create_Payment_table.php
+public function up()
+{
+    Schema::create('Payment', function (Blueprint $table) {
+        $table->id('id_payment'); // PK
+        
+        // FK
+        $table->foreignId('id_detailorder')
+              ->constrained('Detail order', 'id_detailorder')
+              ->onDelete('cascade');
+              
+        $table->string('metode_pemb', 50);
+        $table->decimal('diskon', 10, 2)->nullable();
+        $table->decimal('ongkos_kirim', 10, 2);
+        $table->decimal('total_harga', 10, 2);
+    });
+}

@@ -1,0 +1,19 @@
+// database/migrations/...._create_Diskon_table.php
+public function up()
+{
+    Schema::create('Diskon', function (Blueprint $table) {
+        $table->id('id_diskon'); // PK
+        
+        // FK1
+        $table->foreignId('id_detail_order') // Sesuai ERD
+              ->constrained('Detail order', 'id_detailorder')
+              ->onDelete('cascade');
+              
+        // FK2
+        $table->foreignId('id_seller')
+              ->constrained('Seller', 'id_seller')
+              ->onDelete('cascade');
+              
+        $table->decimal('total_diskon', 10, 2);
+    });
+}

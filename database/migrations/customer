@@ -1,0 +1,13 @@
+// database/migrations/...._create_Customer_table.php
+public function up()
+{
+    Schema::create('Customer', function (Blueprint $table) {
+        $table->id('id_customer'); // PK
+        $table->string('nama_customer');
+        $table->string('email_customer')->unique();
+        $table->string('password_customer');
+        $table->text('alamat_customer');
+        $table->string('telp_customer', 20);
+        // $table->timestamps(); // ERD Anda tidak memilikinya
+    });
+}

@@ -1,0 +1,20 @@
+// database/migrations/...._create_Order_table.php
+public function up()
+{
+    Schema::create('Order', function (Blueprint $table) {
+        $table->id('id_order'); // PK
+        
+        // FK1
+        $table->foreignId('id_menu')
+              ->constrained('Menu', 'id_menu')
+              ->onDelete('cascade');
+              
+        // FK2
+        $table->foreignId('id_customer')
+              ->constrained('Customer', 'id_customer')
+              ->onDelete('cascade');
+              
+        $table->timestamp('tanggal_order')->useCurrent();
+        $table->string('status_order', 50)->default('Pending');
+    });
+}

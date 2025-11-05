@@ -1,0 +1,11 @@
+// database/migrations/...._create_Seller_table.php
+public function up()
+{
+    Schema::create('Seller', function (Blueprint $table) {
+        $table->id('id_seller'); // PK
+        $table->string('nama_seller');
+        $table->text('alamat_seller');
+        $table->string('telp_seller', 20);
+        $table->string('email_seller');
+    });
+}
