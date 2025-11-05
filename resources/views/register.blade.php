@@ -151,31 +151,31 @@
             <div class="success">{{ session('success') }}</div>
         @endif
 
-        <form action="{{ route('register.store') }}" method="POST">
-            @csrf
+     <form action="{{ route('register.store') }}" method="POST">
+    @csrf
 
-            <div class="input-group">
-                <i class="fa fa-user"></i>
-                <input type="text" name="username" placeholder="Username" value="{{ old('username') }}" required />
-            </div>
+    <div class="input-group">
+        <i class="fa fa-user"></i>
+        <input type="text" name="nama_customer" placeholder="Nama Customer" value="{{ old('nama_customer') }}" required />
+    </div>
 
-            <div class="input-group">
-                <i class="fa fa-envelope"></i>
-                <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required />
-            </div>
+    <div class="input-group">
+        <i class="fa fa-envelope"></i>
+        <input type="email" name="email_customer" placeholder="Email" value="{{ old('email_customer') }}" required />
+    </div>
 
-            <div class="input-group">
-                <i class="fa fa-lock"></i>
-                <input type="password" name="password" placeholder="Password" required />
-            </div>
+    <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input type="password" name="password_customer" placeholder="Password" required />
+    </div>
 
-            <div class="input-group">
-                <i class="fa fa-lock"></i>
-                <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required />
-            </div>
+    <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input type="password" name="password_customer_confirmation" placeholder="Konfirmasi Password" required />
+    </div>
 
-            <button type="submit"><i class="fa fa-user-plus"></i> Daftar Sekarang</button>
-        </form>
+    <button type="submit" class="btn">Daftar</button>
+</form>
 
         <div class="login-link">
             Sudah punya akun? <a href="{{ url('/login') }}">Login di sini</a>

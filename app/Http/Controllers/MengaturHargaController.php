@@ -7,21 +7,18 @@ use App\Models\MengaturHarga;
 
 class MengaturHargaController extends Controller
 {
-    // Tampilkan daftar produk
     public function index()
     {
         $produk = MengaturHarga::all();
         return view('mengaturharga.index', compact('produk'));
     }
 
-    // Form edit harga
     public function edit($id)
     {
         $produk = MengaturHarga::findOrFail($id);
         return view('mengaturharga.edit', compact('produk'));
     }
 
-    // Proses update harga
     public function update(Request $request, $id)
     {
         $request->validate([
