@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home | Makanku</title>
+    <title>Home | FoodMate</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
@@ -17,140 +18,110 @@
 
         body {
             font-family: "Poppins", sans-serif;
-            background: linear-gradient(135deg, #ffeb99, #ffd54f);
+            background: url("{{ asset('images/latar.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
             color: #4b3b00;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Background dekorasi lembut */
-        .bg-decor {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            z-index: 0;
-        }
-
-        .bg1 {
-            top: 15%;
-            left: 10%;
-            background: #fff176;
-        }
-
-        .bg2 {
-            bottom: 15%;
-            right: 10%;
-            background: #ffb300;
-        }
-
-        .bg3 {
-            top: 60%;
-            left: 40%;
-            background: #ffca28;
+            justify-content: flex-end;
+            padding-right: 8%;
         }
 
         .content {
+            background: rgba(255, 255, 255, 0);
+            border-radius: 20px;
+            padding: 40px 50px;
+            width: 580px;
             text-align: center;
-            z-index: 1;
             animation: fadeIn 1s ease;
         }
 
         h1 {
-            font-size: 2.6rem;
+            font-size: 3rem;
             margin-bottom: 10px;
             font-weight: 600;
-            letter-spacing: 1px;
-            color: #6d4c00;
+            color: #d35400;
+        }
+
+        h1 span {
+            background: linear-gradient(45deg, #ff6a00, #ffb347);
+            -webkit-background-clip: text;
+            color: transparent;
+            font-weight: 800;
+            font-size: 3.2rem;
         }
 
         p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 40px;
+            font-size: 1rem;
+            color: #6e5c04ff;
+            margin-bottom: 15px;
+            margin-top: 15px;
         }
 
         .role-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            justify-content: center;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 15px;
+            align-items: center;
         }
 
         .role-card {
-            background: rgba(255, 255, 255, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            border-radius: 20px;
-            padding: 30px 40px;
-            width: 200px;
-            backdrop-filter: blur(10px);
+            flex: 1;
+            border-radius: 12px;
+            padding: 20px 15px;
             cursor: pointer;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            gap: 10px;
         }
 
-        .role-card::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, transparent 70%);
-            transform: scale(0);
-            transition: all 0.4s ease;
-            z-index: 0;
+        .role-card.customer {
+            background: rgba(255, 243, 205, 0);
+            border: 1px solid rgba(255, 218, 106, 0);
         }
 
-        .role-card:hover::before {
-            transform: scale(1);
+        .role-card.customer:hover {
+            background: #ffe08a;
         }
 
-        .role-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.4);
+        .role-card.driver {
+            background: rgba(255, 243, 205, 0);
+            border: 1px solid rgba(255, 218, 106, 0);
         }
 
-        .role-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: #6d4c00;
-            z-index: 1;
-            position: relative;
+        .role-card.driver:hover {
+            background: #ffe08a;
+        }
+
+        .role-card.seller {
+            background: rgba(255, 243, 205, 0);
+            border: 1px solid rgba(255, 218, 106, 0);
+        }
+
+        .role-card.seller:hover {
+            background: #ffe08a;
         }
 
         .role-card img {
-            width: 60px;
-            margin-bottom: 10px;
-            transition: transform 0.4s;
-            z-index: 1;
-            position: relative;
+            width: 45px;
+            height: 45px;
         }
 
-        .role-card:hover img {
-            transform: scale(1.15);
-        }
-
-        footer {
-            margin-top: 60px;
-            font-size: 14px;
-            opacity: 0.8;
-            z-index: 1;
-            color: #5c4500;
+        .role-card h3 {
+            font-size: 1rem;
+            color: #4b3b00;
+            font-weight: 500;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(15px);
             }
 
             to {
@@ -159,49 +130,56 @@
             }
         }
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
+        @media (max-width: 768px) {
+            body {
+                justify-content: center;
+                padding: 20px;
+                background-position: left center;
+            }
+
+            .content {
+                width: 90%;
+                padding: 30px;
+            }
+
+            .role-container {
+                flex-direction: column;
             }
 
             .role-card {
-                width: 160px;
-                padding: 25px;
-            }
-
-            .role-card img {
-                width: 50px;
+                width: 100%;
+                flex-direction: row;
+                justify-content: flex-start;
+                gap: 15px;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-decor bg1"></div>
-    <div class="bg-decor bg2"></div>
-    <div class="bg-decor bg3"></div>
-
     <div class="content">
-        <h1>🍳 Selamat Datang di <span style="color:#ff9800;">Makanku</span></h1>
-        <p>Pilih peran Anda untuk masuk ke sistem pemesanan makanan</p>
+        <h1>Selamat Datang di <span>FoodMate</span></h1>
+        <p>Pilih peran Anda untuk masuk</p>
 
         <div class="role-container">
-            <div class="role-card" onclick="window.location.href='{{ route('login') }}'">
+
+            <div class="role-card customer" onclick="window.location.href='{{ route('login') }}'">
                 <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Customer" />
                 <h3>Customer</h3>
             </div>
 
-            <div class="role-card" onclick="window.location.href='{{ route('login.driver') }}'">
+            <div class="role-card driver" onclick="window.location.href='{{ route('loginDriver') }}'">
                 <img src="https://cdn-icons-png.flaticon.com/512/2830/2830307.png" alt="Driver" />
                 <h3>Driver</h3>
             </div>
 
-            <div class="role-card" onclick="window.location.href='{{ route('login.seller') }}'">
+            <div class="role-card seller" onclick="window.location.href='{{ route('loginSeller') }}'">
                 <img src="https://cdn-icons-png.flaticon.com/512/2921/2921822.png" alt="Seller" />
                 <h3>Seller</h3>
             </div>
-        </div>
 
+        </div>
+    </div>
 </body>
 
 </html>
