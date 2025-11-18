@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -40,6 +41,7 @@
         opacity: 0;
         transform: translateY(-10px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -116,6 +118,21 @@
     .register-link a:hover {
       text-decoration: underline;
     }
+
+    .Home-link {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .Home-link a {
+      color: #ff5e62;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .Home-link a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 
@@ -133,12 +150,12 @@
       @csrf
       <div class="input-group">
         <i class="fa fa-envelope"></i>
-        <input type="email" name="email" placeholder="Email" required />
+        <input type="email_customer" name="email_customer" placeholder="Email" required />
       </div>
 
       <div class="input-group">
         <i class="fa fa-lock"></i>
-        <input type="password" name="password" placeholder="Password" required />
+        <input type="password_customer" name="password_customer" placeholder="Password" required />
       </div>
 
       <button type="submit"><i class="fa fa-sign-in-alt"></i> Masuk</button>
@@ -147,6 +164,10 @@
     <div class="register-link">
       Belum punya akun? <a href="{{ url('/register') }}">Daftar di sini</a>
     </div>
+    <div class="Home-link">
+      Kembali ke <a href="{{ url('/Home') }}">Beranda</a>
+    </div>
   </div>
 </body>
+
 </html>
