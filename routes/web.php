@@ -52,3 +52,26 @@ Route::post('/delivery/assign/{deliveryId}/{driverId}', [DeliveryController::cla
 Route::post('/delivery/status/{deliveryId}', [DeliveryController::class, 'updateDeliveryStatus']);
 Route::post('/delivery/confirm/{deliveryId}', [DeliveryController::class, 'confirmDelivery']);
 
+
+
+Route::get('/DashboardDriver', [DriverController::class, 'dashboard'])
+    ->name('DashboardDriver');
+
+Route::get('/DashboardCustomer', function () {
+    return view('DashboardCustomer');
+});
+
+Route::get('/Home', function () {
+    return view('Home');
+});
+Route::get('/login', [SessionController::class, 'showLoginForm'])->name('login');
+Route::get('/loginDriver', [SessionController::class, 'showLoginDriver'])->name('loginDriver');
+Route::post('/loginDriver', [SessionController::class, 'loginDriver'])->name('loginDriverPost');
+Route::get('/loginSeller', [SessionController::class, 'showLoginSeller'])->name('loginSeller');
+
+// REGISTER DRIVER
+Route::get('/registerDriver', [DriverController::class, 'showRegisterDriver'])->name('registerDriver');
+Route::post('/registerDriver', [DriverController::class, 'registerDriver'])->name('registerDriverPost');
+
+Route::get('/registerSeller', [SellerController::class, 'showRegisterSeller'])->name('registerSeller');
+Route::post('/registerSeller', [SellerController::class, 'registerSeller'])->name('registerSellerPost');
