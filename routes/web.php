@@ -28,6 +28,11 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::get('/login', [SessionController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [SessionController::class, 'login']);
 Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
+Route::get('/logout', function () {
+    Session::forget('customer');
+    return redirect('/login')->with('success', 'Anda telah logout!');
+});
+
 
 
 Route::get('/menu/seller/{sellerId}', [MenuController::class, 'listMenusBySeller']);
@@ -53,25 +58,28 @@ Route::post('/delivery/status/{deliveryId}', [DeliveryController::class, 'update
 Route::post('/delivery/confirm/{deliveryId}', [DeliveryController::class, 'confirmDelivery']);
 
 
-
-Route::get('/DashboardDriver', [DriverController::class, 'dashboard'])
-    ->name('DashboardDriver');
-
 Route::get('/DashboardCustomer', function () {
     return view('DashboardCustomer');
 });
+
+Route::get('/dashboard-driver', function () {
+    return view('dashboardDriver');
+})->name('DashboardDriver');
+
 
 Route::get('/Home', function () {
     return view('Home');
 });
 Route::get('/login', [SessionController::class, 'showLoginForm'])->name('login');
 Route::get('/loginDriver', [SessionController::class, 'showLoginDriver'])->name('loginDriver');
-Route::post('/loginDriver', [SessionController::class, 'loginDriver'])->name('loginDriverPost');
+Route::post('/loginDriver', [SessionController::class, 'loginDriver']);
+Route::get('/logoutDriver', [DriverController::class, 'logout'])->name('logoutDriver');
 Route::get('/loginSeller', [SessionController::class, 'showLoginSeller'])->name('loginSeller');
 
 // REGISTER DRIVER
 Route::get('/registerDriver', [DriverController::class, 'showRegisterDriver'])->name('registerDriver');
 Route::post('/registerDriver', [DriverController::class, 'registerDriver'])->name('registerDriverPost');
+
 
 Route::get('/registerSeller', [SellerController::class, 'showRegisterSeller'])->name('registerSeller');
 Route::post('/registerSeller', [SellerController::class, 'registerSeller'])->name('registerSellerPost');
