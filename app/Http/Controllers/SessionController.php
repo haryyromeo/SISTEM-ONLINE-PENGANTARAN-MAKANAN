@@ -22,12 +22,12 @@ class SessionController extends Controller
     {
         $request->validate([
             'email_driver' => 'required|email',
-            'password' => 'required'
+            'password_driver' => 'required'
         ]);
 
         $driver = \App\Models\Driver::where('email_driver', $request->email_driver)->first();
 
-        if ($driver && Hash::check($request->password, $driver->password_driver)) {
+        if ($driver && Hash::check($request->password_driver, $driver->password_driver)) {
 
             Session::put('driver', [
                 'id_driver' => $driver->id_driver,
@@ -36,13 +36,15 @@ class SessionController extends Controller
                 'telp_driver' => $driver->telp_driver,
             ]);
 
-            return redirect()->route('/DashboardDriver')->with('success', 'Login berhasil!');
+            return redirect()->route('DashboardDriver')
+                ->with('success', 'Login berhasil!');
         }
 
         return back()->withErrors([
             'login_error' => 'Email atau password salah!'
         ])->withInput();
     }
+
 
     public function showLoginSeller()
     {
@@ -60,14 +62,12 @@ class SessionController extends Controller
 
         if ($customer && Hash::check($request->password_customer, $customer->password_customer)) {
 
-            // Simpan data customer di session
             Session::put('customer', [
                 'id_customer' => $customer->id_customer,
                 'nama_customer' => $customer->nama_customer,
                 'email_customer' => $customer->email_customer
             ]);
 
-            // ✅ Setelah login, arahkan langsung ke DashboardCustomer
             return redirect('/DashboardCustomer')->with('success', 'Login berhasil!');
         }
 
