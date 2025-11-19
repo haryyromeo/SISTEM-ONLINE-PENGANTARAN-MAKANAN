@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,7 +18,7 @@
 
     body {
       font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #FFD54F, #FFB300);
+      background: linear-gradient(135deg, #ff9966, #ff5e62);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -36,12 +37,19 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .login-container h2 {
-      color: #FFB300;
+      color: #ff5e62;
       margin-bottom: 25px;
       font-weight: 600;
     }
@@ -73,13 +81,13 @@
     }
 
     input:focus {
-      border-color: #FFB300;
+      border-color: #ff5e62;
       outline: none;
       box-shadow: 0 0 6px rgba(255, 179, 0, 0.4);
     }
 
     .btn-login {
-      background-color: #FFB300;
+      background-color: #ff5e62;
       color: white;
       border: none;
       padding: 12px;
@@ -91,7 +99,7 @@
     }
 
     .btn-login:hover {
-      background-color: #FFA000;
+      background-color: #ff5e62;
       transform: scale(1.03);
     }
 
@@ -101,12 +109,26 @@
     }
 
     .register-link a {
-      color: #FFB300;
+      color: #ff5e62;
       text-decoration: none;
       font-weight: 600;
     }
 
     .register-link a:hover {
+      text-decoration: underline;
+    }
+    .Home-link {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .Home-link a {
+      color: #ff5e62;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .Home-link a:hover {
       text-decoration: underline;
     }
   </style>
@@ -140,6 +162,10 @@
     <div class="register-link">
       Belum punya akun seller? <a href="{{ url('/registerSeller') }}">Daftar di sini</a>
     </div>
+    <div class="home-link">
+      Kembali ke <a href="{{ url('/Home') }}">Beranda</a>
+    </div>
   </div>
 </body>
+
 </html>
