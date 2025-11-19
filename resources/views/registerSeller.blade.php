@@ -5,132 +5,159 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Seller</title>
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #ffcc00, #ffeb3b);
+            background: linear-gradient(135deg, #FF9966, #FF5E62);
+            margin: 0;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            padding: 20px;
         }
 
         .register-container {
+            width: 100%;
+            max-width: 450px;
             background: #fff;
-            padding: 40px 50px;
+            padding: 10px 10px;
             border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            width: 400px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.18);
             text-align: center;
         }
 
         h2 {
-            color: #ffb300;
+            color: #FF5E62;
             margin-bottom: 25px;
+            font-size: 26px;
         }
 
         .input-group {
-            text-align: left;
-            margin-bottom: 20px;
+            position: relative;
+            margin-bottom: 18px;
+            width: 90%;
         }
 
-        label {
-            font-weight: 500;
-            color: #555;
+        .input-group i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #FF5E62;
         }
 
-        input, textarea {
+        input,
+        textarea {
             width: 100%;
-            padding: 10px;
-            border-radius: 10px;
+            box-sizing: border-box;
+            padding: 12px 15px 12px 45px;
             border: 1px solid #ddd;
-            margin-top: 5px;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+            background: #fff;
+            color: #444;
+        }
+
+        textarea {
             resize: none;
+            height: 80px;
+            padding-top: 12px;
         }
 
         .btn-register {
-            background-color: #ffb300;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 10px;
             width: 100%;
+            padding: 14px;
+            background: #FF5E62;
+            color: #fff;
             font-weight: 600;
+            border: none;
+            border-radius: 12px;
             cursor: pointer;
+            font-size: 16px;
             transition: 0.3s;
         }
 
         .btn-register:hover {
-            background-color: #ffa000;
+            background: #ff4147;
         }
 
-        .error {
-            color: red;
-            font-size: 14px;
-        }
-
-        .registerSeller-link {
+        .link {
             margin-top: 15px;
             font-size: 14px;
         }
 
-        .registerSeller-link a {
-            color: #ffb300;
-            text-decoration: none;
+        .link a {
+            color: #FF5E62;
             font-weight: 600;
+            text-decoration: none;
         }
 
-        .registerSeller-link a:hover {
+        .link a:hover {
             text-decoration: underline;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 10px;
+            font-size: 14px;
         }
     </style>
 </head>
 
 <body>
+
     <div class="register-container">
         <h2>Register Seller</h2>
 
-        {{-- Pesan error --}}
+        {{-- Pesan Error --}}
         @if($errors->any())
             <div class="error">{{ $errors->first() }}</div>
         @endif
 
-        {{-- Form Registrasi --}}
         <form action="{{ route('registerSellerPost') }}" method="POST">
             @csrf
+
             <div class="input-group">
-                <label>Nama Toko / Seller</label>
-                <input type="text" name="nama_seller" required>
+                <i>🏪</i>
+                <input type="text" name="nama_seller" placeholder="Nama Toko / Seller" required>
             </div>
 
             <div class="input-group">
-                <label>Alamat</label>
-                <textarea name="alamat_seller" rows="3" required></textarea>
+                <i>📍</i>
+                <textarea name="alamat_seller" placeholder="Alamat" required></textarea>
             </div>
 
             <div class="input-group">
-                <label>No. Telepon</label>
-                <input type="text" name="telp_seller" required>
+                <i>📞</i>
+                <input type="text" name="telp_seller" placeholder="No. Telepon" required>
             </div>
 
             <div class="input-group">
-                <label>Email</label>
-                <input type="email" name="email_seller" required>
+                <i>✉️</i>
+                <input type="email" name="email_seller" placeholder="Email" required>
             </div>
 
             <div class="input-group">
-                <label>Password</label>
-                <input type="password" name="password" required>
+                <i>🔒</i>
+                <input type="password" name="password" placeholder="Password" required>
             </div>
 
             <button class="btn-register" type="submit">Daftar</button>
         </form>
 
-        <div class="registerSeller-link">
+        <div class="link">
             Sudah punya akun? <a href="{{ route('loginSeller') }}">Masuk di sini</a>
         </div>
+
+        <div class="link">
+            Kembali ke <a href="{{ url('/Home') }}">Beranda</a>
+        </div>
     </div>
+
 </body>
 
 </html>

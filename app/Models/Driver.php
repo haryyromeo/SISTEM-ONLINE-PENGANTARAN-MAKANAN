@@ -9,20 +9,16 @@ class Driver extends Model
 {
     use HasFactory;
 
-    protected $table = 'Driver';
+    protected $table = 'drivers';
+
     protected $primaryKey = 'id_driver';
-    public $timestamps = false;
 
     protected $fillable = [
-        'id_detail_order', // FK baru
         'nama_driver',
+        'email_driver',
+        'password_driver',
         'telp_driver',
         'status_driver',
+        'id_detailorder'
     ];
-
-    // Relasi: Penugasan Driver ini milik 1 Detail Order
-    public function detailOrder()
-    {
-        return $this->belongsTo(DetailOrder::class, 'id_detail_order', 'id_detailorder');
-    }
 }
