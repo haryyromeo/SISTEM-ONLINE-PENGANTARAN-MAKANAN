@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | PesanMakan</title>
+    <title>Dashboard | FoodMate</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -54,7 +54,6 @@
             color: #fff;
         }
 
-        /* === TOPBAR === */
         .topbar {
             margin-left: 230px;
             background-color: #fff;
@@ -79,7 +78,6 @@
             object-fit: cover;
         }
 
-        /* === CONTENT === */
         .content {
             margin-left: 230px;
             padding: 30px;
@@ -93,7 +91,6 @@
             max-width: 400px;
         }
 
-        /* === CARD === */
         .card {
             border: none;
             border-radius: 20px;
@@ -147,30 +144,30 @@
 </head>
 
 <body>
-    <!-- Sidebar -->
     <div class="sidebar">
-        <h4>🍽 GowFood</h4>
-        <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
-        <a href="#"><i class="fas fa-wallet"></i> Payout</a>
-        <a href="#"><i class="fas fa-cog"></i> Settings</a>
-        <a href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        <h4>FoodMate</h4>
+        <a href="#" class="active"><i class="fas fa-home"></i> Beranda</a>
+        <a href="#"><i class="fas fa-history"></i> Pesanan</a>
+        <a href="#"><i class="fas fa-wallet"></i> Pembayaran</a>
+        <a href="#"><i class="fas fa-cog"></i> Pengaturan</a>
+        <a href="{{ url('/logout') }}"><i class="fas fa-sign-out-alt"></i> Keluar</a>
         <a href="#"><i class="fas fa-question-circle"></i></a>
         <a href="#"><i class="fas fa-question-circle"></i></a>
-        <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+        <a href="#"><i class="fas fa-question-circle"></i> Bantuan</a>
     </div>
 
-    <!-- Topbar -->
     <div class="topbar">
         <div>
             <h5>Selamat Datang!</h5>
         </div>
         <div class="user">
-            <span>💰 Rp 32.000 | VIP Member</span>
-            <img src="{{ asset('images/jisoo.jpg') }}" alt="Jisoo">
+            <span>
+                {{ session('customer.nama_customer') }}
+            </span>
+            <img src="{{ asset('images/jisoo.jpg') }}" alt="User">
         </div>
     </div>
 
-    <!-- Content -->
     <div class="content">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4>🍔 Rekomendasi Hari Ini</h4>
@@ -247,10 +244,6 @@
             </div>
         </div>
     </div>
-
-    <footer>
-        © 2025 PesanMakan | All Rights Reserved
-    </footer>
 </body>
 
 </html>
