@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Driver</title>
+    <title>Register Driver | FoodMate</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -12,7 +12,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #ffca28, #ffd54f);
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -30,7 +30,7 @@
         }
 
         h2 {
-            color: #ffb300;
+            color: #ff5e62;
             margin-bottom: 25px;
             font-weight: 600;
         }
@@ -70,14 +70,14 @@
             top: 50%;
             left: 14px;
             transform: translateY(-50%);
-            color: #ffb300;
+            color: #ff5e62;
             font-size: 16px;
         }
 
         /* Saat input fokus */
         .input-group input:focus {
-            border-color: #ffb300;
-            box-shadow: 0 0 5px rgba(255, 179, 0, 0.4);
+            border-color: #ff5e62;
+            box-shadow: 0 0 5px rgba(211, 11, 71, 0.4);
             outline: none;
         }
 
@@ -87,11 +87,11 @@
             top: -8px;
             left: 38px;
             font-size: 12px;
-            color: #ffb300;
+            color: #ff5e62;
         }
 
         .btn-register {
-            background-color: #ffb300;
+            background-color: #ff5e62;
             color: white;
             border: none;
             padding: 12px;
@@ -104,7 +104,7 @@
         }
 
         .btn-register:hover {
-            background-color: #ffa000;
+            background-color: #ff5e62;
             transform: translateY(-2px);
         }
 
@@ -123,7 +123,7 @@
         }
 
         .link a {
-            color: #ffb300;
+            color: #ff5e62;
             text-decoration: none;
             font-weight: 600;
         }
