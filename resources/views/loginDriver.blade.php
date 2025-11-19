@@ -15,7 +15,7 @@
         body {
             margin: 0;
             font-family: "Poppins", sans-serif;
-            background: linear-gradient(135deg, #ffcc66, #ffb300);
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
             height: 100vh;
             display: flex;
             align-items: center;
@@ -33,7 +33,7 @@
         }
 
         .login-container h2 {
-            color: #d99000;
+            color: #ff5e62;
             font-weight: 600;
             margin-bottom: 20px;
         }
@@ -61,7 +61,7 @@
             top: 50%;
             left: 12px;
             transform: translateY(-50%);
-            color: #d99000;
+            color: #ff5e62;
         }
 
         .input-group input {
@@ -74,13 +74,13 @@
         }
 
         .input-group input:focus {
-            border-color: #ffb300;
+            border-color: #ff5e62;
             box-shadow: 0 0 6px rgba(255, 179, 0, 0.4);
             outline: none;
         }
 
         .btn-login {
-            background: #ffb300;
+            background: #ff5e62;
             color: white;
             border: none;
             padding: 12px;
@@ -93,7 +93,7 @@
         }
 
         .btn-login:hover {
-            background: #e09c00;
+            background: #ff5e62;
             transform: scale(1.03);
         }
 
@@ -105,7 +105,7 @@
 
         .registerDriver-link a,
         .Home-link a {
-            color: #d99000;
+            color: #ff5e62;
             text-decoration: none;
             font-weight: 600;
         }
@@ -122,7 +122,7 @@
     <div class="login-container">
         <h2>Login Driver</h2>
 
-        <form action="{{ route('loginDriverPost') }}" method="POST">
+        <form action="{{ route('loginDriver') }}" method="POST">
             @csrf
 
             <div class="input-group">
