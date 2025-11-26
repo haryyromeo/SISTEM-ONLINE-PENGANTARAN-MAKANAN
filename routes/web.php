@@ -20,47 +20,43 @@ Route::get('/', function () {
 });
 
 
+// ========================== // CUSTOMER REGISTER & LOGIN // ==========================
 // Tampilkan halaman register
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
-
-// Simpan data register
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
 Route::get('/login', [SessionController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [SessionController::class, 'login']);
 Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
-Route::get('/logout', function () {
-    Session::forget('customer');
-    return redirect('/login')->with('success', 'Anda telah logout!');
-});
 
 
+// ========================== // SELLER LOGIN & REGISTER // ==========================
+Route::prefix('seller')->group(function () {
+// Halaman Login Seller: /seller/login 
+Route::get('/login', [SessionController::class, 'showLoginSeller'])->name('loginSeller'); 
+// Proses Login Seller 
+Route::post('/login', [SessionController::class, 'loginSeller'])->name('loginSeller.post'); });
+// REGISTER SELLER 
+Route::get('/registerSeller', [SellerController::class, 'showRegisterSeller']) ->name('registerSeller'); 
+Route::post('/registerSeller', [SellerController::class, 'registerSeller']) ->name('registerSellerPost');
 
-Route::get('/menu/seller/{sellerId}', [MenuController::class, 'listMenusBySeller']);
-Route::post('/order/place', [OrderController::class, 'placeOrder'])->name('order.place');
-Route::post('/order/cancel/{orderId}', [OrderController::class, 'cancelOrder']);
+Route::post('/logoutSeller', [App\Http\Controllers\SellerController::class, 'logout'])
+    ->name('logoutSeller');
+
+
+// ========================== // MENU & ORDER // ==========================
+Route::get('/menu/seller/{sellerId}', [MenuController::class, 'listMenusBySeller']); 
+Route::post('/order/place', [OrderController::class, 'placeOrder'])->name('order.place'); 
+Route::post('/order/cancel/{orderId}', [OrderController::class, 'cancelOrder']); 
 Route::get('/order/track/{orderId}', [OrderController::class, 'trackOrder'])->name('order.track');
-Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
-Route::get('/payment/status/{paymentId}', [PaymentController::class, 'checkPaymentStatus']);
 
-
-Route::get('/seller/{sellerId}/profile', [SellerController::class, 'getSellerProfile']);
-Route::post('/seller/{sellerId}/profile', [SellerController::class, 'updateSellerProfile']);
-Route::get('/seller/{sellerId}/menus', [SellerController::class, 'manageSellerMenu']);
-Route::post('/menu/create', [MenuController::class, 'createMenu']);
-Route::post('/menu/update/{menuId}', [MenuController::class, 'updateMenu']);
-Route::post('/menu/delete/{menuId}', [MenuController::class, 'deleteMenu']);
-
-
-Route::get('/driver/{driverId}', [DriverController::class, 'getDriverDetails']);
-Route::post('/driver/status/{driverId}', [DriverController::class, 'updateDriverStatus']);
-Route::post('/delivery/assign/{deliveryId}/{driverId}', [DeliveryController::class, 'assignDriverToDelivery']);
-Route::post('/delivery/status/{deliveryId}', [DeliveryController::class, 'updateDeliveryStatus']);
-Route::post('/delivery/confirm/{deliveryId}', [DeliveryController::class, 'confirmDelivery']);
 
 
 Route::get('/DashboardCustomer', function () {
     return view('DashboardCustomer');
 });
+
+Route::get('/DashboardSeller', [SellerController::class, 'dashboard']) ->name('DashboardSeller'); 
 
 Route::get('/dashboard-driver', function () {
     return view('dashboardDriver');

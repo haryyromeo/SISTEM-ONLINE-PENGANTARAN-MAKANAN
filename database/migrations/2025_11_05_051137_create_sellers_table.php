@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->text('alamat_seller');
             $table->string('telp_seller', 20);
             $table->string('email_seller')->unique();
+            $table->string('password_seller'); // ✅ tambahkan kolom password
             $table->timestamps();
         });
     }

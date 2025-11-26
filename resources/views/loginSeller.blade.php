@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,15 +36,8 @@
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .login-container h2 {
@@ -117,20 +109,6 @@
     .register-link a:hover {
       text-decoration: underline;
     }
-    .Home-link {
-      margin-top: 15px;
-      font-size: 14px;
-    }
-
-    .Home-link a {
-      color: #ff5e62;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .Home-link a:hover {
-      text-decoration: underline;
-    }
   </style>
 </head>
 
@@ -148,7 +126,7 @@
       @csrf
       <div class="input-group">
         <label>Email</label>
-        <input type="email" name="email" placeholder="Masukkan email" required />
+        <input type="email" name="email_seller" placeholder="Masukkan email" required />
       </div>
 
       <div class="input-group">
@@ -162,10 +140,6 @@
     <div class="register-link">
       Belum punya akun seller? <a href="{{ url('/registerSeller') }}">Daftar di sini</a>
     </div>
-    <div class="home-link">
-      Kembali ke <a href="{{ url('/Home') }}">Beranda</a>
-    </div>
   </div>
 </body>
-
-</html>
+</html>     
