@@ -129,8 +129,7 @@
         <h4>🍜 Seller Panel</h4>
 
         <a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a>
-        <a href="#"><i class="fas fa-hamburger"></i> Daftar Menu</a>
-        <a href="#"><i class="fas fa-tags"></i> Harga & Promo</a>
+        <a href="{{ route('sellerMenu') }}"><i class="fas fa-hamburger"></i> Daftar Menu</a>
         <a href="#"><i class="fas fa-clock"></i> Pesanan Baru</a>
         <a href="#"><i class="fas fa-check"></i> Pesanan Selesai</a>
         <a href="#"><i class="fas fa-user"></i> Profil</a>
@@ -139,6 +138,13 @@
         <a href="#" onclick="document.getElementById('logout-form').submit();">
             <i class="fas fa-sign-out-alt"></i> Logout
         </a>
+
+        <a href="{{ route('seller.profile') }}"
+   class="bg-white shadow-md p-4 rounded-lg hover:bg-gray-100">
+    <h3 class="text-lg font-bold">Profil</h3>
+    <p class="text-gray-600 text-sm">Lihat & edit informasi akun</p>
+</a>
+
 
         <form id="logout-form" action="{{ route('logoutSeller') }}" method="POST" style="display: none;">
             @csrf
@@ -162,18 +168,12 @@
 
         <div class="row g-4">
             <div class="col-md-3 col-sm-6">
-                <div class="menu-card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3480/3480758.png">
-                    <h5>Daftar Menu</h5>
+                <<a href="{{ route('sellerMenu') }}" style="text-decoration:none; color:inherit;">
+                    <div class="menu-card">
+                         <img src="https://cdn-icons-png.flaticon.com/512/3480/3480758.png">
+                        <h5>Daftar Menu</h5>
+                    </div>
                 </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="menu-card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1250/1250615.png">
-                    <h5>Atur Harga</h5>
-                </div>
-            </div>
 
             <div class="col-md-3 col-sm-6">
                 <div class="menu-card">

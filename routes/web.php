@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\SellerProfileController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
@@ -45,7 +46,17 @@ Route::post('/logoutSeller', [App\Http\Controllers\SellerController::class, 'log
 
 
 // ========================== // MENU & ORDER // ==========================
-Route::get('/menu/seller/{sellerId}', [MenuController::class, 'listMenusBySeller']); 
+Route::get('/seller/menu', [SellerController::class, 'menuList'])->name('sellerMenu');
+// Halaman form tambah menu
+Route::get('/seller/menu/add', [SellerController::class, 'addMenu'])->name('seller.addMenu');
+// Proses simpan menu ke database
+Route::post('/seller/menu/add', [SellerController::class, 'storeMenu'])->name('seller.storeMenu');
+// EDIT MENU
+Route::get('/seller/menu/edit/{id}', [SellerController::class, 'editMenu'])->name('seller.editMenu');
+Route::put('/seller/menu/update/{id}', [SellerController::class, 'updateMenu'])->name('seller.updateMenu');
+// HAPUS MENU
+Route::get('/seller/menu/delete/{id}', [SellerController::class, 'deleteMenu'])->name('seller.deleteMenu');
+Route::get('/seller/profile', [SellerProfileController::class, 'index'])->name('seller.profile');
 Route::post('/order/place', [OrderController::class, 'placeOrder'])->name('order.place'); 
 Route::post('/order/cancel/{orderId}', [OrderController::class, 'cancelOrder']); 
 Route::get('/order/track/{orderId}', [OrderController::class, 'trackOrder'])->name('order.track');
