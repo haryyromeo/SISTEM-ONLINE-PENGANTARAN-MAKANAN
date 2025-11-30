@@ -13,27 +13,26 @@
     <style>
         body {
             font-family: "Poppins", sans-serif;
-            background-color: #fffaf5;
+            background-color: #fff7ef;
             margin: 0;
         }
 
-        /* SIDEBAR */
+        /* ===== SIDEBAR ===== */
         .sidebar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 230px;
+            width: 240px;
             height: 100vh;
             background-color: #ff8c42;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            padding: 30px 0;
+            color: white;
+            padding-top: 35px;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .sidebar h4 {
             text-align: center;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 30px;
         }
 
@@ -43,23 +42,24 @@
             padding: 12px 25px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            border-radius: 20px;
-            margin: 5px 15px;
-            transition: 0.3s;
+            gap: 12px;
+            border-radius: 12px;
+            margin: 8px 18px;
+            font-size: 15px;
+            transition: 0.25s;
         }
 
         .sidebar a:hover,
         .sidebar a.active {
-            background-color: #ffb385;
+            background-color: #ffa86c;
         }
 
-        /* TOPBAR */
+        /* ===== TOPBAR ===== */
         .topbar {
-            margin-left: 230px;
-            background-color: #fff;
-            padding: 15px 30px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-left: 240px;
+            background-color: #ffffff;
+            padding: 15px 35px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -68,43 +68,68 @@
         .topbar .user {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-weight: 500;
+            text-decoration: none;
+            color: inherit;
         }
 
         .topbar img {
-            width: 42px;
-            height: 42px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             object-fit: cover;
+            border: 2px solid #ff8c42;
         }
 
-        /* CONTENT */
+        /* ===== ONLINE INDICATOR ===== */
+        .online-wrapper {
+            position: relative;
+        }
+
+        .online-indicator {
+            position: absolute;
+            width: 13px;
+            height: 13px;
+            background: #2ecc71;
+            border-radius: 50%;
+            border: 2px solid white;
+            bottom: 2px;
+            right: 2px;
+            animation: pulse 1.3s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.9);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(0.9);
+            }
+        }
+
+        /* ===== CONTENT ===== */
         .content {
-            margin-left: 230px;
-            padding: 30px;
+            margin-left: 240px;
+            padding: 35px;
         }
 
-        .menu-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        /* CARD MENU SELLER */
         .menu-card {
             background: #fff;
-            border-radius: 18px;
+            border-radius: 16px;
             padding: 25px;
             text-align: center;
-            transition: 0.3s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             cursor: pointer;
+            transition: 0.3s ease;
         }
 
         .menu-card:hover {
-            transform: scale(1.05);
-            background-color: #fff1e3;
+            transform: translateY(-5px);
+            background: #fff1e3;
         }
 
         .menu-card img {
@@ -113,67 +138,71 @@
         }
 
         footer {
-            margin-left: 230px;
+            margin-left: 240px;
             text-align: center;
             padding: 15px;
-            color: #888;
+            color: #777;
             margin-top: 40px;
         }
     </style>
+
 </head>
 
 <body>
 
-    <!-- SIDEBAR -->
+    <!-- ===== SIDEBAR ===== -->
     <div class="sidebar">
         <h4>🍜 Seller Panel</h4>
 
         <a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a>
-        <a href="{{ route('sellerMenu') }}"><i class="fas fa-hamburger"></i> Daftar Menu</a>
-        <a href="#"><i class="fas fa-clock"></i> Pesanan Baru</a>
-        <a href="#"><i class="fas fa-check"></i> Pesanan Selesai</a>
-        <a href="#"><i class="fas fa-user"></i> Profil</a>
 
-        <!-- LOGOUT -->
+        <a href="{{ route('sellerMenu') }}">
+            <i class="fas fa-hamburger"></i> Daftar Menu
+        </a>
+
+        <a href="#"><i class="fas fa-clock"></i> Pesanan Baru</a>
+
+        <a href="#"><i class="fas fa-check"></i> Pesanan Selesai</a>
+
+        <a href="{{ route('seller.profile') }}"><i class="fas fa-user"></i> Profil</a>
+
         <a href="#" onclick="document.getElementById('logout-form').submit();">
             <i class="fas fa-sign-out-alt"></i> Logout
         </a>
 
-        <a href="{{ route('seller.profile') }}"
-   class="bg-white shadow-md p-4 rounded-lg hover:bg-gray-100">
-    <h3 class="text-lg font-bold">Profil</h3>
-    <p class="text-gray-600 text-sm">Lihat & edit informasi akun</p>
-</a>
-
-
-        <form id="logout-form" action="{{ route('logoutSeller') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('logoutSeller') }}" method="POST" style="display:none;">
             @csrf
         </form>
     </div>
 
-    <!-- TOPBAR -->
+    <!-- ===== TOPBAR ===== -->
     <div class="topbar">
         <h5>Selamat Datang, <strong>{{ $seller->nama_seller }}</strong> 👋</h5>
 
-        <div class="user">
+        <a href="{{ route('seller.profile') }}" class="user">
             <span>Seller Aktif</span>
-            <img src="{{ asset('images/default.jpg') }}" alt="Profil">
-        </div>
+
+            <div class="online-wrapper">
+                <img src="{{ $seller->foto_seller ? asset('sellers/'.$seller->foto_seller) : asset('default/default-profile.png') }}">
+                <span class="online-indicator"></span>
+            </div>
+        </a>
     </div>
 
-    <!-- CONTENT -->
+    <!-- ===== CONTENT ===== -->
     <div class="content">
-
-        <div class="menu-title">📌 Menu Aksi Seller</div>
+        <h4 class="mb-4" style="font-weight:600;">📌 Menu Aksi Seller</h4>
 
         <div class="row g-4">
+
             <div class="col-md-3 col-sm-6">
-                <<a href="{{ route('sellerMenu') }}" style="text-decoration:none; color:inherit;">
+                <a href="{{ route('sellerMenu') }}" style="text-decoration:none; color:inherit;">
                     <div class="menu-card">
-                         <img src="https://cdn-icons-png.flaticon.com/512/3480/3480758.png">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3480/3480758.png">
                         <h5>Daftar Menu</h5>
                     </div>
-                </div>
+                </a>
+            </div>
 
             <div class="col-md-3 col-sm-6">
                 <div class="menu-card">
@@ -188,8 +217,8 @@
                     <h5>Pesanan Selesai</h5>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 
     <footer>

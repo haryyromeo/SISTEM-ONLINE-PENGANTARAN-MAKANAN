@@ -40,7 +40,13 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+         'seller' => [     // <── TAMBAHKAN
+        'driver' => 'session',
+        'provider' => 'sellers',
     ],
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -64,11 +70,12 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
+  
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+    'sellers' => [    // <── TAMBAHKAN
+        'driver' => 'eloquent',
+        'model' => App\Models\Seller::class,
+    ],
     ],
 
     /*
@@ -113,3 +120,4 @@ return [
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
 ];
+

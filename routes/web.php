@@ -56,6 +56,20 @@ Route::get('/seller/menu/edit/{id}', [SellerController::class, 'editMenu'])->nam
 Route::put('/seller/menu/update/{id}', [SellerController::class, 'updateMenu'])->name('seller.updateMenu');
 // HAPUS MENU
 Route::get('/seller/menu/delete/{id}', [SellerController::class, 'deleteMenu'])->name('seller.deleteMenu');
+
+//
+// PROFILE (pakai Session, bukan auth guard)
+//
+Route::get('/seller/profile', [SellerProfileController::class, 'index'])->name('seller.profile');
+Route::get('/seller/profile/edit', [SellerProfileController::class, 'edit'])->name('seller.profile.edit');
+Route::post('/seller/profile/update', [SellerProfileController::class, 'update'])->name('seller.profile.update');
+
+
+// ROUTE HALAMAN PROFIL SELLER
+Route::get('/seller/profile', [SellerController::class, 'profile'])
+    ->middleware('auth:seller')
+    ->name('seller.profile');
+
 Route::get('/seller/profile', [SellerProfileController::class, 'index'])->name('seller.profile');
 Route::post('/order/place', [OrderController::class, 'placeOrder'])->name('order.place'); 
 Route::post('/order/cancel/{orderId}', [OrderController::class, 'cancelOrder']); 

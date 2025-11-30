@@ -46,6 +46,15 @@ class SellerController extends Controller
 
         return view('DashboardSeller', compact('seller'));
     }
+   public function profile()
+{
+    $sellerId = session('seller_id');
+    if (!$sellerId) return redirect()->route('loginSeller')->with('error','Silakan login.');
+    $seller = Seller::find($sellerId);
+    return view('profile', compact('seller'));
+}
+
+
 
     public function logout(Request $request) {
         $request->session()->flush();
