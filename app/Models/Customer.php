@@ -3,19 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Customer extends Model
+class Customer extends Authenticatable
 {
     use HasFactory;
 
-    // 🔹 Tambahkan baris ini untuk mengarahkan ke tabel yang benar
     protected $table = 'customers';
-
-    // 🔹 Jika primary key bukan 'id', tuliskan nama kolomnya
     protected $primaryKey = 'id_customer';
 
-    // 🔹 Kolom yang bisa diisi secara mass assignment
     protected $fillable = [
         'nama_customer',
         'email_customer',
@@ -23,4 +19,14 @@ class Customer extends Model
         'alamat_customer',
         'telp_customer',
     ];
+
+    protected $hidden = [
+        'password_customer',
+    ];
+
+    // Laravel default pakai kolom "password"
+    public function getAuthPassword()
+    {
+        return $this->password_customer;
+    }
 }

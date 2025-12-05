@@ -1,40 +1,29 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use HasFactory;
-
-    protected $table = 'Order';
+    protected $table = 'orders';
     protected $primaryKey = 'id_order';
-    public $timestamps = false; // Menggunakan tanggal_order
-
     protected $fillable = [
-        'id_menu',      // Sesuai ERD
-        'id_customer',  // Sesuai ERD
-        'tanggal_order',
-        'status_order',
-    ];
+    'id_customer', 'id_seller', 'id_menu', 'jumlah', 'alamat',
+    'total_harga', 'biaya_pengiriman', 'biaya_layanan',
+    'total_keseluruhan', 'tanggal_order', 'status_order'
+];
 
-    // Relasi: Order ini milik 1 Menu
-    public function menu()
-    {
+
+
+    public function menu() {
         return $this->belongsTo(Menu::class, 'id_menu', 'id_menu');
     }
 
-    // Relasi: Order ini milik 1 Customer
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class, 'id_customer', 'id_customer');
+    public function seller() {
+        return $this->belongsTo(\App\Models\Seller::class, 'id_seller', 'id_seller');
     }
 
-    // Relasi: 1 Order punya banyak Detail Order
-    public function detailOrders()
-    {
-        return $this->hasMany(DetailOrder::class, 'id_order', 'id_order');
+    public function customer() {
+        return $this->belongsTo(\App\Models\Customer::class, 'id_customer', 'id_customer');
     }
 }

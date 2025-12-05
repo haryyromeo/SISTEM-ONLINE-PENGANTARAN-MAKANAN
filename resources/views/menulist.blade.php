@@ -155,7 +155,7 @@
                     <i class="fa fa-arrow-left"></i> Kembali
                 </a>
 
-                <a href="{{ route('seller.addMenu') }}" class="btn-main btn-add">
+                <a href="{{ route('addMenu') }}" class="btn-main btn-add">
                     <i class="fa fa-plus"></i> Tambah Menu
                 </a>
             </div>
@@ -191,7 +191,7 @@
                 <td>{{ $menu->stok_menu }}</td>
 
                 <td>
-                    <a href="{{ route('seller.editMenu', $menu->id_menu) }}" class="btn-action edit">
+                    <a href="{{ route('editMenu', $menu->id_menu) }}" class="btn-action edit">
                         <i class="fa fa-edit"></i> Edit
                     </a>
 

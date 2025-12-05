@@ -150,12 +150,12 @@
       @csrf
       <div class="input-group">
         <i class="fa fa-envelope"></i>
-        <input type="email_customer" name="email_customer" placeholder="Email" required />
+        <input type="email" name="email_customer" placeholder="Email" required />
       </div>
 
       <div class="input-group">
         <i class="fa fa-lock"></i>
-        <input type="password_customer" name="password_customer" placeholder="Password" required />
+        <input type="password" name="password_customer" placeholder="Password" required />
       </div>
 
       <button type="submit"><i class="fa fa-sign-in-alt"></i> Masuk</button>

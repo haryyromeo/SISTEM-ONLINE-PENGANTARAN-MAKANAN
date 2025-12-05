@@ -10,11 +10,10 @@ class SellerMiddleware
     public function handle($request, Closure $next)
     {
         if (!Auth::guard('seller')->check()) {
-            return redirect('/login-seller')
+            return redirect('/loginSeller')
                 ->with('error', 'Silakan login dulu.');
         }
 
         return $next($request);
     }
 }
-

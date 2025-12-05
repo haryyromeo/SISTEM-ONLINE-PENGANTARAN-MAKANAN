@@ -45,8 +45,35 @@ return [
         'driver' => 'session',
         'provider' => 'sellers',
     ],
+    
+    'customer' => [
+        'driver' => 'session',
+        'provider' => 'customers',
+    ],
+],
+
+'providers' => [
+    'customers' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Customer::class,
     ],
 
+        'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class,
+    ],
+
+  
+    'sellers' => [    // <── TAMBAHKAN
+        'driver' => 'eloquent',
+        'model' => App\Models\Seller::class,
+    ],
+
+    'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------
@@ -65,18 +92,7 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
-  
-
-    'sellers' => [    // <── TAMBAHKAN
-        'driver' => 'eloquent',
-        'model' => App\Models\Seller::class,
-    ],
-    ],
+   
 
     /*
     |--------------------------------------------------------------------------
@@ -104,6 +120,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+           ],
+
+    'sellers' => [   // <── WAJIB TAMBAH
+        'provider' => 'sellers',
+        'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+        'expire' => 60,
+        'throttle' => 60,
     ],
 
     /*

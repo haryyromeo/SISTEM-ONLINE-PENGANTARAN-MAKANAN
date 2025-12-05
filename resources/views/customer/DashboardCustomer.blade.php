@@ -27,7 +27,7 @@
     <div class="sidebar">
         <h4 class="text-center">FoodMate</h4>
         <a href="#" class="active">🏠 Beranda</a>
-        <a href="{{ route('customer.pesanMenu') }}">📦 Pesanan</a>
+        <a href="{{ route('customer.listOrder') }}">📦 Pesanan</a>
         <a href="#">💳 Pembayaran</a>
         <a href="#">⚙ Pengaturan</a>
         <a href="{{ url('/logout') }}">🚪 Keluar</a>

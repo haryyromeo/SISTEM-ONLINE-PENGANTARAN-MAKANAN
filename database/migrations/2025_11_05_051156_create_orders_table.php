@@ -25,8 +25,16 @@ return new class extends Migration
                   ->on('menus')
                   ->onDelete('cascade');
 
-            $table->date('tanggal_order');
-            $table->string('status_order', 50);
+            // DATA ORDER
+            $table->integer('jumlah');                    // jumlah pesanan
+            $table->string('alamat');                    // alamat pengiriman
+            $table->integer('total_harga');              // harga awal
+            $table->integer('biaya_pengiriman');         // ongkir
+            $table->integer('biaya_layanan');            // biaya admin
+            $table->integer('total_keseluruhan');        // total akhir
+
+            $table->date('tanggal_order');               // tanggal
+            $table->string('status_order', 50);          // pending / selesai
             $table->timestamps();
         });
     }

@@ -1,15 +1,17 @@
-<?php 
-namespace App\Http\Controllers; 
+<?php
 
-use Illuminate\Http\Request; 
-use App\Models\Seller; 
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Seller;
 use App\Models\Menu;
-use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Facades\Hash;
 
 class SellerController extends Controller 
-{ 
+{
+    // Register seller
     public function showRegisterSeller() {
-        return view('RegisterSeller');
+        return view('seller/registerSeller');
     }
 
     public function registerSeller(Request $request) {
@@ -32,35 +34,73 @@ class SellerController extends Controller
         return redirect()->route('loginSeller')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
+    // Dashboard
     public function dashboard() {
-        $sellerId = session('seller_id');
-        if (!$sellerId) {
-            return redirect()->route('loginSeller')->with('error', 'Silakan login terlebih dahulu.');
-        }
-
-        $seller = Seller::find($sellerId);
-        if (!$seller) {
-            session()->forget('seller_id');
-            return redirect()->route('loginSeller')->with('error', 'Akun tidak ditemukan.');
-        }
-
-        return view('DashboardSeller', compact('seller'));
+        $seller = Seller::find(session('seller_id'));
+        if (!$seller) return redirect()->route('loginSeller')->with('error', 'Silakan login.');
+        return view('seller/DashboardSeller', compact('seller'));
     }
-   public function profile()
-{
-    $sellerId = session('seller_id');
-    if (!$sellerId) return redirect()->route('loginSeller')->with('error','Silakan login.');
+
+    // Lihat profil
+    public function profile() {
+    $sellerId = session('seller_id'); // ambil session
+    if (!$sellerId) {
+        return redirect('/loginSeller')->with('error', 'Silakan login dulu.');
+    }
+
     $seller = Seller::find($sellerId);
-    return view('profile', compact('seller'));
+    return view('seller/profile', compact('seller'));
 }
 
 
-
-    public function logout(Request $request) {
-        $request->session()->flush();
-        return redirect('/loginSeller')->with('success', 'Berhasil logout!');
+    // Form edit profil
+    public function editProfile() {
+        $seller = Seller::find(session('seller_id'));
+        if (!$seller) return redirect()->route('loginSeller')->with('error', 'Silakan login.');
+        return view('seller/edit-profile', compact('seller'));
     }
 
+    // Update profil
+    public function updateProfile(Request $request) {
+        $seller = Seller::find(session('seller_id'));
+        $request->validate([
+            'nama_seller' => 'required|string|max:255',
+            'email_seller' => 'required|email|max:255',
+            'telp_seller' => 'nullable|string|max:15',
+            'alamat_seller' => 'nullable|string|max:255',
+            'foto_seller' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if($request->hasFile('foto_seller')) {
+            $file = $request->file('foto_seller');
+            $filename = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('sellers'), $filename);
+
+            if($seller->foto_seller && file_exists(public_path('sellers/'.$seller->foto_seller))) {
+                unlink(public_path('sellers/'.$seller->foto_seller));
+            }
+
+            $seller->foto_seller = $filename;
+        }
+
+        $seller->nama_seller = $request->nama_seller;
+        $seller->email_seller = $request->email_seller;
+        $seller->telp_seller = $request->telp_seller;
+        $seller->alamat_seller = $request->alamat_seller;
+        $seller->save();
+
+        return redirect()->route('seller.profile')->with('success', 'Profil berhasil diperbarui!');
+    }
+
+    // Logout
+    public function logout(Request $request) {
+        $request->session()->forget('seller_id');
+        return redirect()->route('loginSeller')->with('success', 'Berhasil logout!');
+    }
+
+    // ==========================
+    // MENU CRUD
+    // ==========================
     public function menuList() {
         $seller = Seller::find(session('seller_id'));
         $menus = Menu::where('id_seller', $seller->id_seller)->get();
@@ -68,17 +108,14 @@ class SellerController extends Controller
     }
 
     public function addMenu() {
-        $seller = Seller::find(session('seller_id'));
-        return view('addmenu', compact('seller'));
+        return view('seller/addmenu');
     }
 
     public function storeMenu(Request $request) {
-        $seller = Seller::find(session('seller_id'));
-
         $request->validate([
             'nama_menu' => 'required',
-            'harga'     => 'required|numeric',
-            'stok'      => 'required|numeric',
+            'harga' => 'required|numeric',
+            'stok' => 'required|numeric',
             'gambar_menu' => 'image|mimes:jpg,png,jpeg|max:2048'
         ]);
 
@@ -90,11 +127,10 @@ class SellerController extends Controller
         }
 
         Menu::create([
-            'id_customer' => null,
-            'id_seller'   => $seller->id_seller,
-            'nama_menu'   => $request->nama_menu,
-            'harga_menu'  => $request->harga,
-            'stok_menu'   => $request->stok,
+            'id_seller' => session('seller_id'),
+            'nama_menu' => $request->nama_menu,
+            'harga_menu' => $request->harga,
+            'stok_menu' => $request->stok,
             'gambar_menu' => $gambarNama,
         ]);
 
@@ -103,12 +139,11 @@ class SellerController extends Controller
 
     public function editMenu($id) {
         $menu = Menu::findOrFail($id);
-        return view('editmenu', compact('menu'));
+        return view('seller/editmenu', compact('menu'));
     }
 
     public function updateMenu(Request $request, $id) {
         $menu = Menu::findOrFail($id);
-
         $menu->nama_menu = $request->nama_menu;
         $menu->harga_menu = $request->harga;
         $menu->stok_menu = $request->stok;
@@ -117,24 +152,19 @@ class SellerController extends Controller
             $file = $request->file('gambar_menu');
             $filename = time().'_'.$file->getClientOriginalName();
             $file->move(public_path('images/menu'), $filename);
-
             $menu->gambar_menu = $filename;
         }
 
         $menu->save();
-
         return redirect()->route('sellerMenu')->with('success', 'Menu berhasil diperbarui!');
     }
 
     public function deleteMenu($id) {
         $menu = Menu::findOrFail($id);
-
-        if ($menu->gambar_menu && file_exists(public_path('images/menu/'.$menu->gambar_menu))) {
-            unlink(public_path('images/menu/'.$menu->gambar_menu));
+        if ($menu->gambar_menu && file_exists(public_path('images/menu/' . $menu->gambar_menu))) {
+            unlink(public_path('images/menu/' . $menu->gambar_menu));
         }
-
         $menu->delete();
-
-        return back()->with('success', 'Menu berhasil dihapus!');
+        return redirect()->route('sellerMenu')->with('success', 'Menu berhasil dihapus!');
     }
 }

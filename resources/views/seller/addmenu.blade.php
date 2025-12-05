@@ -113,7 +113,7 @@
 
         <div class="form-card">
 
-            <form action="{{ route('seller.storeMenu') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('storeMenu') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <label>Nama Menu</label>

@@ -29,9 +29,9 @@ class Menu extends Model
 
     // Relasi: Menu ini milik 1 Seller
     public function seller()
-    {
-        return $this->belongsTo(Seller::class, 'id_seller', 'id_seller');
-    }
+{
+    return $this->belongsTo(\App\Models\Seller::class, 'id_seller', 'id_seller');
+}
 
     // Relasi: 1 Menu bisa ada di banyak Order
     public function orders()

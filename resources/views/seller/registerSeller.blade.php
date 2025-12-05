@@ -4,9 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daftar Seller | Sistem Pemesanan Makanan</title>
+  <title>Daftar Seller | FoodMate</title>
 
-  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -19,58 +18,50 @@
 
     body {
       font-family: "Poppins", sans-serif;
-      background: url("{{ asset('images/latar.jpg') }}") no-repeat center center fixed;
+      background: url("{{ asset('images/latar6.jpg') }}") no-repeat left center fixed;
       background-size: cover;
       height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
-      position: relative;
-      padding: 20px;
-    }
-
-    /* overlay gelap lembut agar background lebih smooth */
-    body::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 243, 230, 0.55);
-      backdrop-filter: blur(2px);
-      top: 0;
-      left: 0;
+      justify-content: flex-end;
+      padding-right: 8%;
     }
 
     .register-container {
-      position: relative;
-      background: rgba(255, 250, 245, 0.88);
-      backdrop-filter: blur(10px);
-      border-radius: 28px;
-      width: 430px;
-      padding: 45px 50px;
+      margin-right: 60px;
+      background: rgba(255, 214, 170, 0.85);
+      backdrop-filter: blur(8px);
+      border-radius: 30px;
+      width: 400px;
+      padding: 15px 30px;
       text-align: center;
-      border: 1px solid rgba(230, 150, 90, 0.35);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
       animation: fadeIn 0.8s ease;
+      border: 1px solid rgba(255, 210, 170, 0.5);
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     h2 {
-      color: #d66b1f;
+      color: #e67e22;
       margin-bottom: 25px;
       font-weight: 600;
-      font-size: 26px;
-      letter-spacing: 0.5px;
     }
 
     form {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 14px;
     }
 
     .input-group {
@@ -80,51 +71,49 @@
     .input-group i {
       position: absolute;
       top: 50%;
-      left: 14px;
+      left: 12px;
       transform: translateY(-50%);
-      color: #d66b1f;
-      font-size: 15px;
+      color: #e67e22;
     }
 
     input,
     textarea {
       width: 100%;
-      padding: 13px 14px 13px 42px;
-      border-radius: 12px;
-      border: 1px solid #eac4a3;
-      background: rgba(255, 255, 255, 0.92);
+      padding: 12px 12px 12px 38px;
+      border-radius: 10px;
+      border: 1px solid #f5cba7;
+      background: rgba(255, 255, 255, 0.9);
       font-size: 14px;
-      transition: 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     textarea {
-      height: 70px;
+      height: 65px;
       resize: none;
     }
 
     input:focus,
     textarea:focus {
-      border-color: #d66b1f;
+      border-color: #e67e22;
       outline: none;
-      box-shadow: 0 0 6px rgba(214, 107, 31, 0.3);
+      box-shadow: 0 0 6px rgba(230, 126, 34, 0.3);
       background: #fffdf9;
     }
 
     button {
-      background-color: #ff7a42;
+      background-color: #ff7043;
       color: white;
       border: none;
-      padding: 14px;
-      border-radius: 12px;
+      padding: 12px;
+      border-radius: 10px;
       font-size: 16px;
       cursor: pointer;
       transition: 0.3s ease;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+      font-weight: 500;
     }
 
     button:hover {
-      background-color: #ff5f1e;
+      background-color: #ff5722;
       transform: scale(1.03);
     }
 
@@ -137,24 +126,29 @@
 
     .login-link,
     .home-link {
-      margin-top: 14px;
+      margin-top: 15px;
       font-size: 14px;
     }
 
     a {
-      color: #d66b1f;
-      font-weight: 600;
+      color: #e67e22;
       text-decoration: none;
+      font-weight: 600;
     }
 
     a:hover {
       text-decoration: underline;
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 900px) {
+      body {
+        justify-content: center;
+        padding: 0 20px;
+        background-position: center;
+      }
+
       .register-container {
-        width: 100%;
-        padding: 35px 30px;
+        width: 50%;
       }
     }
   </style>
@@ -166,13 +160,17 @@
     <h2>Daftar Seller</h2>
 
     @if ($errors->any())
-    <div class="errors">
-      <ul style="margin-left: 18px;">
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
+      <div class="errors">
+        <ul style="margin-left: 18px;">
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
+
+    @if(session('success'))
+      <div class="success">{{ session('success') }}</div>
     @endif
 
     <form action="{{ route('registerSellerPost') }}" method="POST">
@@ -181,7 +179,7 @@
       <div class="input-group">
         <i class="fa fa-store"></i>
         <input type="text" name="nama_seller" placeholder="Nama Toko / Seller"
-          value="{{ old('nama_seller') }}" required>
+               value="{{ old('nama_seller') }}" required />
       </div>
 
       <div class="input-group">
@@ -191,24 +189,24 @@
 
       <div class="input-group">
         <i class="fa fa-phone"></i>
-        <input type="text" name="telp_seller" placeholder="No. Telepon"
-          value="{{ old('telp_seller') }}" required>
+        <input type="text" name="telp_seller" placeholder="Nomor Telepon"
+               value="{{ old('telp_seller') }}" required />
       </div>
 
       <div class="input-group">
         <i class="fa fa-envelope"></i>
         <input type="email" name="email_seller" placeholder="Email"
-          value="{{ old('email_seller') }}" required>
+               value="{{ old('email_seller') }}" required />
       </div>
 
       <div class="input-group">
         <i class="fa fa-lock"></i>
-        <input type="password" name="password_seller" placeholder="Password" required>
+        <input type="password" name="password_seller" placeholder="Password" required />
       </div>
 
       <div class="input-group">
         <i class="fa fa-lock"></i>
-        <input type="password" name="password_seller_confirmation" placeholder="Konfirmasi Password" required>
+        <input type="password" name="password_seller_confirmation" placeholder="Konfirmasi Password" required />
       </div>
 
       <button type="submit">Daftar</button>
